@@ -1,29 +1,37 @@
+
 import java.util.Date;
 
-public class Block
-{
+public class Block {
+
     public String hash;
     public String previousHash;
 
-    /* Our data that will be a simple message or transaction */
-    private String data; 
-
-    /* As number of milliseconds since 1/1/1970 (UNIX Timestamp) */
+    private String data;
     private long timeStamp;
 
-
-    /* Block Constructor */
-
-    public Block(String data, String previousHash)
-    {
+    public Block(String data, String previousHash) {
         this.data = data;
         this.previousHash = previousHash;
         this.timeStamp = new Date().getTime();
 
-        this.hash = StringUtil.calculateHash(
+        this.hash = calculateHash();
+    }
+
+    public String calculateHash() {
+        return StringUtil.calculateHash(
             previousHash,
             timeStamp,
             data
-          );
+        );
+    }
+
+    @Override
+    public String toString() {
+        return "Block{" +
+               "hash='" + hash + '\'' +
+               ", previousHash='" + previousHash + '\'' +
+               ", data='" + data + '\'' +
+               ", timeStamp=" + timeStamp +
+               '}';
     }
 }
