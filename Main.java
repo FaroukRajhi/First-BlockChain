@@ -5,6 +5,11 @@ public class Main {
 
     public static ArrayList<Block> blockchain = new ArrayList<>();
 
+    public static int difficulty = 4;
+
+    public static String hashTarget =
+        new String(new char[difficulty]).replace('\0', '0');
+
     
 public static boolean isChainValid() {
 
@@ -37,6 +42,12 @@ public static boolean isChainValid() {
             System.out.println("Previous Hashes not equal");
             return false;
         }
+
+        /* Check if hash is solved */
+        if(!currentBlock.hash.substring( 0, difficulty).equals(hashTarget)) {
+				System.out.println("This block hasn't been mined");
+				return false;
+		}
     }
 
     return true;
